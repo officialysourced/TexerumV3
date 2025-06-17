@@ -8,6 +8,91 @@
   <script type="text/javascript" src="app.js" defer></script>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <style>
+    .game-card.upload-card {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 20px;
+        min-height: 150px;
+        align-items: center;
+        align-self: center;
+    }
+    .upload-button {
+        padding: 10px 15px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 0.9em;
+        margin-top: 10px;
+        transition: background-color 0.3s ease;
+    }
+    .upload-button:hover {
+        background-color: #0056b3;
+    }
+    #gameFileInput {
+        display: none;
+    }
+    .game-embed-container {
+        width: 100%;
+        margin-top: 20px;
+        border-radius: 1em;
+        overflow: hidden;
+        background-color: var(--hover-clr);
+        display: none;
+    }
+    #game-embed {
+        width: 100%;
+        height: 60vh;
+        border: none;
+    }
+    .game-embed-placeholder {
+        padding: 20px;
+        text-align: center;
+        color: var(--secondary-text-clr);
+    }
+    .game-card {
+        background-color: var(--card-bg-clr);
+        border-radius: 1em;
+        padding: 15px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .game-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    }
+    .game-card i {
+        color: var(--accent-clr);
+        margin-bottom: 10px;
+    }
+    .game-name {
+        color: var(--text-clr);
+        font-weight: bold;
+        text-align: center;
+    }
+    .games-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: 20px;
+        padding: 20px;
+        max-width: 1200px;
+        margin: 20px auto;
+    }
+    @media (max-width: 768px) {
+        .games-grid {
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        }
+    }
+  </style>
 </head>
 <body>
   <nav id="sidebar">
@@ -36,7 +121,7 @@
           <span>VM's</span>
         </a>
       </li>
-      <li>
+      <li class="active">
         <a href="games.html">
           <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
           <span>Games</span>
@@ -48,562 +133,91 @@
           <span>Settings</span>
         </a>
       </li>
+      <li>
+        <a href="https://discord.gg/thTDFEUVwe" target="_blank" class="discord-nav-link">
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M240-400h320v-80H240v80Zm0-120h480v-80H240v80Zm0-120h480v-80H240v80ZM80-80v-720q0-33 23.5-56.5T160-880h640q33 0 56.5 23.5T880-800v480q0 33-23.5 56.5T800-240H240L80-80Zm126-240h594v-480H160v525l46-45Zm-46 0v-480 480Z"/></svg>
+          <span>Discord</span>
+        </a>
+      </li>
+      <li>
+        <a href="https://docs.google.com/document/d/1_FmH3BlSBQI7FGgAQL59-ZPe8eCxs35wel6JUyVaG8Q/edit?tab=t.0" target="_blank">
+          <i class="bi bi-file-earmark-text" style="font-size: 1.5rem;"></i>
+          <span>Docs</span>
+        </a>
+      </li>
     </ul>
   </nav>
 
   <main>
-    <div class="search-container">
-      <input type="text" class="search-input" placeholder="Search a game!...">
-      <i class="bi bi-search search-icon"></i>
-    </div>
+    <p style="text-align: center;">https://docs.google.com/document/d/1_FmH3BlSBQI7FGgAQL59-ZPe8eCxs35wel6JUyVaG8Q/edit?tab=t.0 The ultimate Games Stash</p>
     <div class="games-grid">
-      <div class="game-card" onclick="window.location.href='games/clslope2player.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Slope</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/cltetrisgba.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Tetris</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/cl2048.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">2048</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clblockysnakes.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Snake</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='#'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Pac-Man</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='#'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Minecraft</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/geometry-dash.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Geometry Dash</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clamongus.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Among Us</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/cl1.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">1</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/cl10bullets.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">10 Bullets</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/cl10minutestildawn.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">10 Minutes Till Dawn</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clnullkevin.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">10-103 Null Kevin</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/cl12minibattles.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">12 Mini Battles</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/cl1on1soccer.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">1 On 1 Soccer</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/cl1on1tennis.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">1 On 1 Tennis</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/cl1v1maybeidk.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">1v1.lol</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/cl2048cupcakes.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">2048 Cupcakes</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/cl2doom.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">2Doom</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/cl2Dshooting.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">2D Shooting</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/cl3dash.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">3Dash</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/cl3slices2.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">3 Slices 2</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/cl40exescape.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">40xescape</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/cl4thandgoal.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">4th And Goal</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/cl60secondsburgerrun.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">60 Seconds Burger Run</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/cl60secsantarun.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">60 Seconds Santa Run</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/cl8ballclassic.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">8 Ball Classic</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/cl8ballpool.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">8 Ball Pool</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/cl9007199254740992.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">9007199254740992</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/cl99balls.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">99 Balls</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clabandoned.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Abandoned</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clabandoned3.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Abandoned 3</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clacegangstertaxi.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Ace Gangster Taxi</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clachievementunlocked.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Achievement Unlocked</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clachievmentunlocked2.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Achievement Unlocked 2</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clachievmentunlocked3.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Achievement Unlocked 3</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clachillies1fr.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Achilles</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clachillies2.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Achilles 2</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clADOFAI.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">A Dance of Fire and Ice</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clADarkRoom.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">A Dark Room</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/cladayintheoffice.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">A Day In The Office</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/cladventneon.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Advent Neon</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clahoysurvival.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Ahoy Survival</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clagariolite.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Agar.io Lite</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clageofwar.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Age of War</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clageofwar2.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Age of War 2</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clarmormayhem2.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Armor Mayhem 2</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clarsonate.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Arsonate</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clarewethereyet.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Are We There Yet</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clagesofconflict.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Ages of Conflict</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clkoopasrevenge.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">A Koopa’s Revenge</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clakoopasrevenge2.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">A Koopa’s Revenge 2</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clalienhominid.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Alien Hominid</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clalienskyinvasion.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Alien Sky Invasion</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clalientransporter.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Alien Transporter</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clallocation.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Allocation</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clamaze.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Amaze</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clstreangeropepolice.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Amazing Strange Rope Police</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clamidstthesky.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Amidst The Sky</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clamigopancho.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Amigo Pancho</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clamigopancho2.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Amigo Pancho 2</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clamigopancho3.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Amigo Pancho 3</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clamigopancho4.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Amigo Pancho 4</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clamigopancho5.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Amigo Pancho 5</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clamigopancho6.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Amigo Pancho 6</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clamigopancho7.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Amigo Pancho 7</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clancientsins.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Ancient Sins</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clangrybirds.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Angry Birds</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clangrybirdsshowdown.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Angry Birds Showdown</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clangrybirdsspace.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Angry Birds Space</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clappleshooter.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Apple Shooter</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clappleworm.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Apple Worm</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/claquaparkio.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Aquapark.io</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clarcheryworldtour.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Archery World Tour</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clascent.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Ascent</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clattackhole.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Attack Hole</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clasmallworldcup.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">A small World Cup</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clavalanche.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Avalanche</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clAwesomePirates.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Awesome Pirates</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clawesomeplanes.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Awesome Planes</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clawesometanks.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Awesome Tanks</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clawesometanks2.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Awesome Tanks 2</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clbabeltower.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Babel Tower</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clbabychiccoadventure.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Baby Chicco Adventure</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clbackrooms.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Backrooms</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clbackrooms2D.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Backrooms 2D</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clbackyardbaseball.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Backyard Baseball</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clbaconmaydie.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Bacon May Die</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clbadicecream.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Bad Ice Cream</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clbadmondaysimulator.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Bad Monday Simulator</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clbadparenting.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Bad Parenting</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clbadpiggies.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Bad Piggies</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clbadtimesim.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Bad Time Simulator</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clbaldisbasics.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Baldi’s Basics</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clbaldisfunnewschoolultimate.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Baldi’s Fun New School Ultimate</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clballsandbricksgood.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Balls And Bricks</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clballblast.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Ball Blast</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clbanditgunslingers.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Bandit Gunslingers</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clbananasimulator.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Banana Simulator</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clbankrobbery2.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Bank Robbery 2</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clbarryhasasecret.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Barry Has a Secret</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clbas.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">BAS</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clbaseballbros.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Baseball Bros</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clbasketbattle.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Basket Battle</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clbasketbros.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Basket Bros</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clbasketrandom.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Basket Random</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clbasketslamdunk2.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Basket Slam Dunk 2</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clbasketballfrvr.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Basketball FRVR</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clbasketballlegendsgoodywoody.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Basketball Legends</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clbasketballstars.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Basketball Stars</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clbatterup.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Batter Up</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clbattles.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Battles</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clbattlesim.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Battle Simulator</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clbazookaboy.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Bazooka Boy</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clbearbarians.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Bearbarians</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clbfdibranches.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">BFDI: Branches</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clbigicetowertinysquare.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Big Ice Tower Tiny Square</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clbigneontowertinysquare.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Big Neon Tower Tiny Square</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clbigshotboxing.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Big Shot Boxing</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clBig_Time_Butter_Baron.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Big Time Butter Baron</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clbtts.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Big Tower Tiny Square</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clbtts2.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Big Tower Tiny Square 2</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clbindingofisaccsheeptime.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Binding of Isaac Wrath of The Lamb</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/cltboilambeternal.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Binding of Isaac - Wrath of the Lamb Eternal Edition</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clbioevil4.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Bio Evil 4</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clbitlife.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Bitlife</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clbitplanes.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Bit Planes</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clblackjack.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Blackjack</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clblackjackbattle.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Blackjack Battle</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clblacksmithlab.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Blacksmith Lab</div>
-      </div>
-      <div class="game-card" onclick="window.location.href='games/clbleachvsnaruto.html'">
-        <i class="bi bi-controller" style="font-size: 1.5rem;"></i>
-        <div class="game-name">Bleach vs. Naruto</div>
-      </div>
+      <div class="game-card upload-card">
+        <i class="bi bi-upload" style="font-size: 1.5rem;"></i>
+        <div class="game-name">Upload Your Game (.html)</div>
+        <input type="file" id="gameFileInput" accept=".html" />
+        <button class="upload-button" onclick="document.getElementById('gameFileInput').click()">Choose File</button>
+      </div>
+    </div>
+
+    <div class="game-embed-container" id="gameEmbedContainer">
+        <div class="game-embed-placeholder">
+            <h3>Your uploaded game will appear here!</h3>
+            <p>Please select an HTML file to play.</p>
+        </div>
+        <iframe id="game-embed" allowfullscreen sandbox="allow-scripts allow-same-origin allow-popups allow-forms"></iframe>
     </div>
   </main>
+    <div class="game-embed-container" id="gameEmbedContainer">
+        <div class="game-embed-placeholder">
+            <h3>Your uploaded game will appear here!</h3>
+            <p>Please select an HTML file to play.</p>
+        </div>
+        
+    </div>
+  </main>
+
   <script>
     function toggleSidebar() {
       const sidebar = document.getElementById('sidebar');
       sidebar.classList.toggle('close');
     }
-    
-    function setupSearch() {
-      const searchInput = document.querySelector('.search-input');
-      const gameCards = document.querySelectorAll('.game-card');
-      
-      searchInput.addEventListener('input', function() {
-        const searchTerm = this.value.toLowerCase();
-        
-        gameCards.forEach(card => {
-          const gameName = card.querySelector('.game-name').textContent.toLowerCase();
-          if (gameName.includes(searchTerm)) {
-            card.style.display = 'flex';
-          } else {
-            card.style.display = 'none';
-          }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const gameFileInput = document.getElementById('gameFileInput');
+        const gameEmbedIframe = document.getElementById('game-embed');
+        const gameEmbedContainer = document.getElementById('gameEmbedContainer');
+
+        gameFileInput.addEventListener('change', (event) => {
+            const file = event.target.files[0];
+            if (file && file.type === 'text/html') {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const htmlContent = e.target.result;
+                    const blob = new Blob([htmlContent], { type: 'text/html' });
+                    const url = URL.createObjectURL(blob);
+
+                    gameEmbedIframe.src = url;
+                    gameEmbedContainer.style.display = 'block';
+                    gameEmbedContainer.querySelector('.game-embed-placeholder').style.display = 'none';
+
+                    if (gameEmbedIframe.dataset.currentUrl) {
+                        URL.revokeObjectURL(gameEmbedIframe.dataset.currentUrl);
+                    }
+                    gameEmbedIframe.dataset.currentUrl = url;
+                };
+                reader.readAsText(file);
+            } else {
+                alert('Please upload a valid HTML file.');
+                gameEmbedContainer.style.display = 'none';
+                gameEmbedContainer.querySelector('.game-embed-placeholder').style.display = 'block';
+                gameEmbedIframe.src = '';
+            }
         });
-      });
-    }
-    
-    document.addEventListener('DOMContentLoaded', setupSearch);
+
+        if (!gameEmbedIframe.src) {
+            gameEmbedContainer.style.display = 'none';
+        }
+    });
   </script>
 </body>
 </html>
